@@ -16,4 +16,4 @@
   publish = "public"
 
 [context.production.environment]
-  REACT_APP_API_URL = "https://your-backend.onrender.com/api"
+  REACT_APP_API_URL = "https://metin-6ryo.onrender.com/api"
