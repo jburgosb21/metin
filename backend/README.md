@@ -34,7 +34,7 @@ API REST para la aplicación de productividad RPG "Metin". Desarrollada con Node
    ```
    DATABASE_URL="postgresql://user:password@host:port/dbname?sslmode=require"
    JWT_SECRET="tu-secreto-super-seguro"
-   PORT=3001
+   PORT=5000
    FRONTEND_URL="https://tu-app.netlify.app"
    ```
 4. Inicializar base de datos:
