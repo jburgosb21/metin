@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import TaskColumn from '../components/TaskColumn';
 
@@ -8,11 +8,7 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(true);
   const [activeFilter, setActiveFilter] = useState('all');
 
-  useEffect(() => {
-    fetchTasks();
-  }, []);
-
-  const fetchTasks = async () => {
+  const fetchTasks = useCallback(async () => {
     setLoading(true);
     try {
       const response = await api.get('/tasks');
@@ -22,7 +18,11 @@ const Dashboard = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [api]);
+
+  useEffect(() => {
+    fetchTasks();
+  }, [fetchTasks]);
 
   const handleTaskUpdate = (updatedTask) => {
     setTasks(prevTasks =>
@@ -34,16 +34,9 @@ const Dashboard = () => {
     setTasks(prevTasks => prevTasks.filter(task => task.id !== taskId));
   };
 
-  const handleNewTask = (newTask) => {
-    setTasks(prevTasks => [newTask, ...prevTasks]);
-  };
 
-  const filteredTasks = tasks.filter(task => {
-    if (activeFilter === 'all') return true;
-    if (activeFilter === 'completed') return task.completed;
-    if (activeFilter === 'pending') return !task.completed;
-    return task.type.toUpperCase() === activeFilter;
-  });
+
+
 
   const habits = tasks.filter(task => task.type.toUpperCase() === 'HABIT');
   const dailies = tasks.filter(task => task.type.toUpperCase() === 'DAILY');
