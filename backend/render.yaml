@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: metin-backend
+    env: node
+    buildCommand: npm install && npx prisma generate
+    startCommand: npm start
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: PORT
+        value: 3001
+      - key: FRONTEND_URL
+        value: https://your-metin-app.netlify.app
+    healthCheckPath: /api/health
+    autoDeploy: true

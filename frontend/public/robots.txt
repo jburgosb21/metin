@@ -1,0 +1,6 @@
+# Metin RPG Productivity App
+User-agent: *
+Allow: /
+Disallow: /api
+
+Sitemap: https://your-metin-app.netlify.app/sitemap.xml
